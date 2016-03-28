@@ -83,7 +83,7 @@ http://www.interva.net/
 \seealso{
 \code{\link[InSilicoVA]{insilico}}, \code{\link[InterVA4]{InterVA}}, \code{\link{interVA.train}}, and \code{\link[Tariff]{tariff}}
 }
-\keyword{InSilicoVA,}
-\keyword{InterVA4,}
+\keyword{InSilicoVA}
+\keyword{InterVA4}
 \keyword{Tariff}
 
