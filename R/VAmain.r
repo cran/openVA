@@ -96,8 +96,7 @@ codeVA <- function(data, data.type = c("WHO", "PHMRC", "customize")[1],
     }
     binary <- ConvertData.phmrc(input = data.train, 
                                 input.test = data, 
-                                cause = causes.train,
-                                type = phmrc.type, ...)
+                                cause = causes.train, ...)
     data.train <- binary$output
     data <- binary$output.test
     causes.train <- colnames(data.train)[2]
@@ -125,8 +124,9 @@ codeVA <- function(data, data.type = c("WHO", "PHMRC", "customize")[1],
 
     }else if(data.type == 'PHMRC'|| data.type == "customize"){
       
-      args$train <- args$data.train
-      args$cause <- args$causes.train
+      args$data <- as.name("data")
+      args$train <- as.name("data.train")
+      args$cause <- as.name("causes.train")
       args$type <- convert.type      
 
       fit <- do.call("insilico.train", pairlist(args)[[1]][-1])
@@ -228,6 +228,17 @@ codeVA <- function(data, data.type = c("WHO", "PHMRC", "customize")[1],
 
     # update with NBC's official wrapper function
     fit <- ova2nbc(data.train, data, causes.train)
+
+    # fix the caseID bug of NBC
+    if(colnames(fit$prob)[1] != "CaseID"){
+      temp <- data.frame(CaseID = fit$test.ids)
+      fit$prob <- cbind(temp, fit$prob)
+    }
+    for(i in 1:dim(fit$prob)[1]){
+      if(sum(fit$prob[i, -1]) > 0){
+        fit$prob[i, -1] <- fit$prob[i, -1] / sum(fit$prob[i, -1])
+      }
+    }
   }else{
         stop("Error, unknown model specification")
   }
