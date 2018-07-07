@@ -1,11 +1,14 @@
-60cc2635a3a63e96cecbaa5ef8ebadd4 *DESCRIPTION
-3ef7e2fa2005cce914aaa45ec9f9f715 *NAMESPACE
-28b2e6c7f88c0c69e4949481c722c5c0 *R/CSMF.r
+e0b5fbc5bd1677c3206ed7950a9c9577 *DESCRIPTION
+46b573cc2dcb8a1b21f084bb3fe3012f *NAMESPACE
+f2d74d53dd9625da3badd25b73af8beb *R/CSMF.r
 2cd9cd9971cc26260c25f524114cbfd3 *R/ConvertData.r
-ac8e5f175ed5b0d0f505482154d5c944 *R/VAmain.r
+e718b7a86fa2bc9d756581d4f034c76b *R/VAmain.r
+6f1bce3a64826a0ec77f189e90d40af8 *R/attach.R
 f8c699ee3ef6f7f053eabf731ea73f13 *R/interVA.train.r
 4533e957ae4f85604eecbc9b737c88b4 *R/stackplot.r
-c85f41b74a2bc99e732d333249cfa91a *inst/NEWS.Rd
+7fa03080aad49112f6046085e340dff3 *R/update.R
+1aa89c1560113b323fe8d33a49fc9acb *R/zzz.R
+c34d35d71533d58a1643a1153d01361d *inst/NEWS.Rd
 0e967379caf6d992f3b72871a8b3edd3 *man/ConvertData.Rd
 e7ebde48d56466ff665a8d539df52ad2 *man/ConvertData.phmrc.Rd
 195d61b2a93d6dc411ca241eb99430ba *man/codeVA.Rd
@@ -15,5 +18,7 @@ e7ebde48d56466ff665a8d539df52ad2 *man/ConvertData.phmrc.Rd
 87c092dad05f00c8cb38c0a0856fc15e *man/getPHMRC_url.Rd
 cb740db0a1c36c319c43d53f3237cdde *man/getTopCOD.Rd
 a609a42717ec6a943f2ac777c43edd4c *man/interVA.train.Rd
+66d3c62b4e665f3bc7acf1e66ad60e24 *man/openVA_status.Rd
+761606f766a7799907716dcd539d43d9 *man/openVA_update.Rd
 595dcbef7f6378f522d1c1abb97c4b47 *man/plotVA.Rd
 d2441f80130b432f26a263b8b70a5074 *man/stackplotVA.Rd
