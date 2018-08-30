@@ -1,11 +1,11 @@
 Package: openVA
 Type: Package
 Title: Automated Method for Verbal Autopsy
-Version: 1.0.5
-Date: 2018-07-06
+Version: 1.0.6
+Date: 2018-08-28
 Author: Zehang Li, Tyler McCormick, Sam Clark
 Maintainer: Zehang Li <lizehang@uw.edu>
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.1)
 Imports: InterVA5 (>= 1.0.1), InSilicoVA (>= 1.1.3), InterVA4 (>=
         1.7.3), Tariff (>= 1.0.1), ggplot2, crayon, cli, purrr
 Suggests: nbc4va
@@ -13,6 +13,6 @@ Description: Implements multiple existing open-source algorithms for coding caus
 License: GPL-2
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2018-07-07 05:07:51 UTC; zehangli
+Packaged: 2018-08-29 23:14:59 UTC; zehangli
 Repository: CRAN
-Date/Publication: 2018-07-07 16:20:08 UTC
+Date/Publication: 2018-08-30 04:30:13 UTC

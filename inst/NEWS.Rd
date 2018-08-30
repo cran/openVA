@@ -6,7 +6,14 @@
 \newcommand{\CRANpkg}{\href{http://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 \newcommand{\sspace}{\ifelse{latex}{\out{~}}{ }}
 
-\section{Changes in version 1.0.4 (2018-07-06)}{
+\section{Changes in version 1.0.6 (2018-08-28)}{
+  \itemize{ 
+    \item Fix minor issue when saving InterVA and InSilicoVA results to file.
+    \item Fix crash from InterVA using training data with no symptom. 
+    \item Fix minor bug where default arguments not passed to function when omitted.
+  }
+}
+\section{Changes in version 1.0.5 (2018-07-06)}{
   \itemize{ 
     \item Optimize the imports of dependent packages.
     \item Add version check functions and message when attached.

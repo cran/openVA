@@ -132,6 +132,9 @@ codeVA <- function(data, data.type = c("WHO2012", "WHO2016", "PHMRC", "customize
     if(is.null(Nsim)){
       stop("Please specify Nsim: number of iterations to draw from InSilicoVA sampler")
     }
+    if(is.null(args$warning.write) && !(is.null(args$write))){
+          args$warning.write <- args$write
+      }
 
 
     if(is.null(args$burnin)){
@@ -140,6 +143,21 @@ codeVA <- function(data, data.type = c("WHO2012", "WHO2016", "PHMRC", "customize
     if(is.null(args$thin)){
       args$thin <- 10 * (Nsim < 10000) + 10 *(Nsim >= 10000)
     }
+
+    if(is.null(args$Nsim)){
+      args$Nsim <- Nsim
+    }
+
+    # # add in default parameters
+    # formals <- as.list(formals())
+    # defs <- setdiff(names(formals), names(args))
+    # if(length(defs) > 0){
+    #       for(i.args in 1:length(defs)){
+    #         if(!is.null(formals[[defs[i.args]]])){
+    #           args[[defs[i.args]]] <- formals[[defs[i.args]]]
+    #         }
+    #       }
+    # }
 
 
     if(data.type %in% c("WHO2012", "WHO2016")){
@@ -173,14 +191,13 @@ codeVA <- function(data, data.type = c("WHO2012", "WHO2016", "PHMRC", "customize
     if(data.type == "WHO2012"){
         # to avoid writing to file every time
         if(is.null(args$write)){
-          write <- FALSE
+          args$write <- FALSE
         }
-        fit <- InterVA4::InterVA(Input = data, HIV = HIV, Malaria = Malaria, replicate = replicate, 
-                       write = write, ...)
+        fit <- InterVA4::InterVA(Input = data, HIV = HIV, Malaria = Malaria, replicate = replicate,  ...)
     }else if(data.type == "WHO2016"){
         # to avoid writing to file every time
         if(is.null(args$write)){
-          write <- FALSE
+          args$write <- FALSE
         }
         # for interVA to recognize the syntax
         for(i in 1:dim(data)[2]){                
@@ -192,7 +209,7 @@ codeVA <- function(data, data.type = c("WHO2012", "WHO2016", "PHMRC", "customize
         if(sum(tmp %in% c("y", "n", "-", ".")) < length(tmp)){
           stop("InterVA5 input data contains values other than 'y', 'n', '.', or '-'. Please check your input, especially for extra space characters in the cells, or standardize how missing data is coded.")
         }
-        fit <- InterVA5::InterVA5(Input = data, HIV = HIV, Malaria = Malaria, write = write, ...)
+        fit <- InterVA5::InterVA5(Input = data, HIV = HIV, Malaria = Malaria, ...)
     }else if(data.type == 'PHMRC'|| data.type == "customize"){
         fit <- interVA.train(data = data, 
                              train=data.train, 
@@ -212,7 +229,9 @@ codeVA <- function(data, data.type = c("WHO2012", "WHO2016", "PHMRC", "customize
   }else if(model == "Tariff"){
    if(data.type == "WHO2016"){
       data <- ConvertData(data, yesLabel = c("y", "Y"), noLabel = c("n", "N"), missLabel = c("-"))
+      data.train <- ConvertData(data.train, yesLabel = c("y", "Y"), noLabel = c("n", "N"), missLabel = c("-"))
     }
+    data.train[, causes.train] <- as.character(data.train[, causes.train])
     if(data.type %in% c("WHO2012", "WHO2016")){
       fit <- Tariff::tariff(causes.train = causes.train, 
                     symps.train = data.train, 
