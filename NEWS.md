@@ -1,5 +1,15 @@
 # openVA - changes
 
+Version 1.0.9 (2020-02-17)
+==========================
++ Various minor document and helper function enhancements.
+
+Version 1.0.8 (2019-02-18)
+==========================
++ Minor clarifications in documentation.
++ Reduced the number of iterations saved for InSilicoVA when Nsim is large.
+
+
 Version 1.0.8 (2019-02-15)
 ==========================
 + Minor improvement in data cleaning steps of PHMRC data that deals with duplicate questions with categorical responses.

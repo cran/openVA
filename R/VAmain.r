@@ -12,7 +12,7 @@
 #' @param data.train Training data with the same columns as \code{data}, except for an additional column specifying cause-of-death label. It is not used if \code{data.type} is ``WHO'' and \code{model} is ``InterVA'' or ``InSilicoVA''.  The first column also has to be death ID for ``WHO'' and ``customized'' types.
 #' @param causes.train the column name of the cause-of-death assignment label in training data.
 #' @param causes.table list of causes to consider in the training data. Default to be NULL, which uses all the causes present in the training data.
-#' @param model Currently support four models: ``InSilicoVA'', ``InterVA'', ``Tariff'', and ``NBC''.
+#' @param model Currently supports four models: ``InSilicoVA'', ``InterVA'', ``Tariff'', and ``NBC''.
 #' @param Nchain Parameter specific to ``InSilicoVA'' model. Currently not used.
 #' @param Nsim Parameter specific to ``InSilicoVA'' model. Number of iterations to run the sampler.
 #' @param version Parameter specific to ``InterVA'' model. Currently supports ``4.02'', ``4.03'', and ``5.0''. For InterVA-4, ``4.03'' is strongly recommended as it fixes several major bugs in ``4.02'' version. ``4.02'' is only included for backward compatibility. ``5.0'' version implements the InterVA-5 model, which requires different data input format.
@@ -52,7 +52,7 @@
 #'                     Nsim=1000, auto.length = FALSE)
 #'
 #' fit2 <- codeVA(data = test, data.type = "customize", model = "InterVA",
-#'                data.train = train, causes.train = "cause",
+#'                data.train = train, causes.train = "cause", write=FALSE,
 #'                version = "4.02", HIV = "h", Malaria = "l")
 #'
 #' fit3 <- codeVA(data = test, data.type = "customize", model = "Tariff",
@@ -92,10 +92,10 @@ codeVA <- function(data, data.type = c("WHO2012", "WHO2016", "PHMRC", "customize
   # check data input 
   # --------------------------------------------------------------------#
   if(data.type == "WHO2016" & model == "InterVA" & version != "5.0"){
-    stop("WHO2016 type input does not works with InterVA 4.02 or 4.03. Consider switching to 5.0")
+    stop("Error: WHO2016 type input does not work with InterVA 4.02 or 4.03. Consider switching to 5.0")
   }
   if(data.type == "WHO2012" & model == "InterVA" & version == "5.0"){
-    stop("WHO2012 type input does not works with InterVA 5.0. Consider switching to 4.03")
+    stop("Error: WHO2012 type input does not work with InterVA 5.0. Consider switching to 4.03")
   }
   
   if(data.type %in% c("WHO2012", "WHO2016") && 
@@ -141,7 +141,7 @@ codeVA <- function(data, data.type = c("WHO2012", "WHO2016", "PHMRC", "customize
       args$burnin <- round(Nsim / 2)
     }
     if(is.null(args$thin)){
-      args$thin <- 10 * (Nsim < 10000) + 10 *(Nsim >= 10000)
+      args$thin <- 10 + 10 *(Nsim >= 10000)
     }
 
     if(is.null(args$Nsim)){
@@ -351,15 +351,15 @@ codeVA <- function(data, data.type = c("WHO2012", "WHO2016", "PHMRC", "customize
 #' plotVA(fit4)
 #' }
 plotVA <- function(object, top = 10, title = NULL, ...){
-  if(class(object) == "interVA"){
+  if(methods::is(object, "interVA")){
     csmf <- InterVA4::CSMF(object, top.plot = top, main = title, ...)
-  }else if(class(object) == "interVA5"){
+  }else if(methods::is(object, "interVA5")){
     csmf <- InterVA5::CSMF5(object, top.plot = top, main = title, ...)
-  }else if(class(object) == "tariff"){
+  }else if(methods::is(object, "tariff")){
     plot(object, top = top, main = title, ...)
-  }else if(class(object) == "insilico"){
+  }else if(methods::is(object, "insilico")){
     plot(object, top = top, title = title, ...)
-  }else if(class(object) == "nbc"){
+  }else if(methods::is(object,  "nbc")){
     plot(object, top.plot = top, main = title, ...)
   }else{
     stop("Unknown object to plot")
