@@ -1,6 +1,6 @@
-d9fc2d4f91e4cbbe599ecbac533a5e79 *DESCRIPTION
+49c8fe916eba9164f49bdf39641411ba *DESCRIPTION
 250108353b8e653107b21e46e5ee484f *NAMESPACE
-f77985ffd7edbd3e54a44fc4c06845d2 *NEWS.md
+d5de3baf36ce6595cdb489ef4a0ff655 *NEWS.md
 841bfe637258c356aa32af062a071e81 *R/CSMF.r
 711e5cff8d733f269357dd4a027120a3 *R/ConvertData.r
 1fbc64bc8e5508cb74c31dfdcc3d1db8 *R/VAmain.r
@@ -23,4 +23,4 @@ f3576ecb03a51f34713ae6ae0edd7e8c *man/interVA.train.Rd
 595dcbef7f6378f522d1c1abb97c4b47 *man/plotVA.Rd
 023c67336a2877ab2fda28883b30a563 *man/stackplotVA.Rd
 8b2fdac6e21f6663f6714ea39ac37c06 *tests/testthat.R
-0e1abd93069e5f0a9a9799b06e84c803 *tests/testthat/tests.stackplot.R
+b4891f9b02455a4f3bd7203831b60d54 *tests/testthat/tests.stackplot.R
