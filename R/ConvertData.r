@@ -4,8 +4,9 @@
 #' @param yesLabel The value(s) coding "Yes" in the input matrix.
 #' @param noLabel The value(s) coding "No" in the input matrix.
 #' @param missLabel The value(s) coding "Missing" in the input matrix.
+#' @param data.type The coding scheme of the output. This can be either "WHO2012" or "WHO2016".
 #'
-#' @return a matrix with coding scheme as follows: "Y" for yes, "" for No, and "." for missing.
+#' @return a data frame coded as follows. For WHO2012 scheme: "Y" for yes, "" for No, and "." for missing. For WHO2016 scheme: "y" for yes, "n" for No, and "-" for missing.
 #' @export ConvertData
 #'
 #' @examples
@@ -24,7 +25,7 @@
 #' new
 #' }
 
-ConvertData <- function(input, yesLabel = NULL, noLabel = NULL, missLabel = NULL){
+ConvertData <- function(input, yesLabel = NULL, noLabel = NULL, missLabel = NULL, data.type = c("WHO2012", "WHO2016")[1]){
 
 	##
 	## Help user prepare data from other format into the default
@@ -32,6 +33,10 @@ ConvertData <- function(input, yesLabel = NULL, noLabel = NULL, missLabel = NULL
 	if(is.null(yesLabel) || is.null(noLabel) || is.null(missLabel)){
 		stop("Error: please specify what values are used in the data to represent yes, no, and missing")
 	}
+
+	ynm <- c("Y", "", ".")
+	if(data.type == "WHO2016") ynm <- c("y", "n", "-")
+
 	
 	output <- data.frame(matrix("", dim(input)[1], dim(input)[2]), 
 						stringsAsFactors = FALSE)
@@ -51,9 +56,9 @@ ConvertData <- function(input, yesLabel = NULL, noLabel = NULL, missLabel = NULL
 			output[, i] <- tmp
 		# if the column contains only yes, no, or missing
 		}else{
-			output[which(tmp %in% yesLabel), i] <- "Y"
-			output[which(tmp %in% noLabel), i] <- ""
-			output[which(tmp %in% missLabel), i] <- "."
+			output[which(tmp %in% yesLabel), i] <- ynm[1]
+			output[which(tmp %in% noLabel), i] <- ynm[2]
+			output[which(tmp %in% missLabel), i] <- ynm[3]
 			}
 	}
 
@@ -91,7 +96,7 @@ getPHMRC_url <- function(type){
 }
 #' Convert standard PHMRC data into binary indicator format
 #'
-#' The PHMRC data and the description of the format could be found at \url{http://ghdx.healthdata.org/record/population-health-metrics-research-consortium-gold-standard-verbal-autopsy-data-2005-2011}. This function convert the symptoms into binary indicators of three levels: Yes, No, and Missing. The health care experience (HCE) and free-text columns, i.e., columns named "word_****", are not considered in the current version of data conversion.
+#' The PHMRC data and the description of the format could be found at \url{https://ghdx.healthdata.org/record/ihme-data/population-health-metrics-research-consortium-gold-standard-verbal-autopsy-data-2005-2011}. This function convert the symptoms into binary indicators of three levels: Yes, No, and Missing. The health care experience (HCE) and free-text columns, i.e., columns named "word_****", are not considered in the current version of data conversion.
 
 #' @param input standard PHMRC data format
 #' @param input.test standard PHMRC data format to be transformed in the same way as \code{input}

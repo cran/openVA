@@ -59,9 +59,9 @@ stackplotVA <- function(x, grouping = NULL,
                         type = c("stack", "dodge")[1], 
                         group_order = NULL, err = TRUE,
                         CI = 0.95, sample_size_print = FALSE,
-                        xlab = "Group", ylab = "CSMF", ylim = NULL,
+                        xlab = "", ylab = "CSMF", ylim = NULL,
                         title = "CSMF by broader cause categories", 
-                        horiz = FALSE, angle = 60,  
+                        horiz = FALSE, angle = 0,  
                         err_width = .4, err_size = .6, 
                         border = "black", bw = FALSE, filter_legend = FALSE, ...) {
   
@@ -121,9 +121,19 @@ stackplotVA <- function(x, grouping = NULL,
         
         present_cod <- colnames(csmf[[i]])
         
-      } else {
+      } else if(n == 1){
+        g <- InSilicoVA::stackplot(x[[i]], grouping = grouping,
+                        type = type, 
+                        group_order = group_order, err = err,
+                        CI = CI, sample_size_print = sample_size_print,
+                        xlab = xlab, ylab = ylab, ylim = ylim,
+                        title = title,  horiz = horiz, angle = angle,  
+                        err_width = err_width, err_size = err_size, 
+                        border = border, bw = bw, filter_legend = filter_legend, ...)
+        return(g)
+       }else{ 
         stop("Sub-population specification exists in InSilicoVA fit,
-             please rerun with only the InSilicoVA object\n")
+             # please rerun with only the InSilicoVA object\n")
       }
     }
     else {
@@ -161,7 +171,11 @@ stackplotVA <- function(x, grouping = NULL,
     }
   
   if(length(x)>1) {
-    barNames <- paste("model", 1:length(x))
+    if(is.null(names(x))){
+      barNames <- paste("model", 1:length(x))
+    }else{
+      barNames <- names(x)
+    }
   } else {
     barNames <- ""
   }
