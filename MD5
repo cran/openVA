@@ -1,10 +1,10 @@
-ae6570a37ead28aef0f3fdf398e8cb91 *DESCRIPTION
+e2e5d32ad66c041c6d63fe70a4ddb805 *DESCRIPTION
 250108353b8e653107b21e46e5ee484f *NAMESPACE
-c189d64ff4884d69385ae77c9bf65f00 *NEWS.md
-56ca73a622a8ede9c4366b01ea9f1d0b *R/CSMF.r
-850ba005c4b98e4d53e6c4c7e0e676da *R/ConvertData.r
-9f37a11f755fe326bbef7409d01a9f3c *R/VAmain.r
-6f1bce3a64826a0ec77f189e90d40af8 *R/attach.R
+d3bd601afbf63f4788eabdf764f86722 *NEWS.md
+ce81c05a5d6ff11ba2fb3333d7ef740f *R/CSMF.r
+5bc5988b67c82e244c59c6beff3681cf *R/ConvertData.r
+d0fa2fee73f7ddc900d24714b0c25b69 *R/VAmain.r
+05579a99406b1862b813eb36f83020bb *R/attach.R
 9ac0eea47deed376adddb2178a695d7c *R/interVA.train.r
 d5f51c2eb2b66b4b112ff0a55c7a0a62 *R/stackplot.r
 e7fa20d634207f1e2fed9baff289b7aa *R/update.R
